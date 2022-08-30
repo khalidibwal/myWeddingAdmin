@@ -25,6 +25,7 @@
     }
   },
   "rules": {
+    "react/self-closing-comp": "off",
     "no-new": 0,
     "no-shadow": 0,
     "no-console": 0,
