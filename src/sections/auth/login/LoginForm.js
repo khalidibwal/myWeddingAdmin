@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, Stack, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
+import axios from 'axios';
+import swal from 'sweetalert';
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
 
@@ -17,6 +19,8 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [myUsername, setUsername] = useState('')
+  const [myPassword, setPassword] = useState('')
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -24,33 +28,50 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: '',
-    password: '',
-    remember: true,
+    username: myUsername,
+    password: myPassword
   };
 
   const methods = useForm({
-    resolver: yupResolver(LoginSchema),
-    defaultValues,
+    resolver: yupResolver(LoginSchema)
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
 
   const onSubmit = async () => {
     navigate('/dashboard', { replace: true });
   };
 
+  const handleUser = e => {
+    setUsername(e.target.value)
+    console.log(myUsername,'e')
+  }
+
+  const handlePassword = e => {
+    setPassword(e.target.value)
+  }
+
+  const HandleSubmit = event => {
+    event.preventDefault();
+
+    axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/auth/login`, defaultValues)
+    .then((response)=> {
+      if(response.status === 200){
+        navigate('/dashboard/wedding', {
+          auth: response.data.authToken
+        })
+    }})
+    .catch((error)=> swal("Warning!", "Data yang anda masukan salah!", "error"))
+  }
+
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={HandleSubmit}>
       <Stack spacing={3}>
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="username" label="Email address" onChange={handleUser}/>
 
         <RHFTextField
           name="password"
           label="Password"
+          onChange={handlePassword}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -71,7 +92,7 @@ export default function LoginForm() {
         </Link>
       </Stack>
 
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+      <LoadingButton fullWidth size="large" type="submit" variant="contained">
         Login
       </LoadingButton>
     </FormProvider>
