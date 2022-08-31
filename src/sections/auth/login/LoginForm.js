@@ -57,8 +57,9 @@ export default function LoginForm() {
     .then((response)=> {
       if(response.status === 200){
         navigate('/dashboard/wedding', {
-          auth: response.data.authToken
+          state: response.data.authToken
         })
+        console.log(response.data.authToken)
     }})
     .catch((error)=> swal("Warning!", "Data yang anda masukan salah!", "error"))
   }
