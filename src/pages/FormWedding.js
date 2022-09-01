@@ -1,22 +1,27 @@
+// import { UserContext } from 'src/contextProvider/UserContext';
 import { Card, TextField, Grid, Stack, Button } from '@mui/material';
 import { Container } from '@mui/system';
+import { UserContext } from 'src/contextProv/UserContext';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useContext} from 'react'
 import Page from '../components/Page';
 import Label from '../components/Label';
+
 
 
 function FormWedding() { 
   const Navigate = useNavigate();
   const Location = useLocation();
-  // const value = useContext(UserContext);
   const [myUsername, setMyusername] = useState('')
   const [authenticated, setauthenticated] = useState(null);
+  const value = useContext(UserContext);
 
   useEffect(() => {
     const getToken = localStorage.getItem('myToken')
+
     const isAuthorized = () =>{
+
       axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/auth/me`,{
         headers:{
           'Authorization' : getToken
@@ -25,7 +30,6 @@ function FormWedding() {
       .then((response)=>{
         if (getToken) {
           setauthenticated(getToken);
-          setMyusername(response.data.name)
         }
         else{
           Navigate('/login')
