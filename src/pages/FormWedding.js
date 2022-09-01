@@ -10,20 +10,27 @@ import Label from '../components/Label';
 function FormWedding() { 
   const Navigate = useNavigate();
   const Location = useLocation();
+  // const value = useContext(UserContext);
   const [myUsername, setMyusername] = useState('')
+  const [authenticated, setauthenticated] = useState(null);
+
   useEffect(() => {
+    const getToken = localStorage.getItem('myToken')
     const isAuthorized = () =>{
       axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/auth/me`,{
         headers:{
-          'Authorization' : Location.state
+          'Authorization' : getToken
         }
       })
-      .then((response)=> {
-        if(response.state === 200){
+      .then((response)=>{
+        if (getToken) {
+          setauthenticated(getToken);
           setMyusername(response.data.name)
         }
-      })
-      .catch((e)=> console.log(e))
+        else{
+          Navigate('/login')
+        }
+      })  
     }
     isAuthorized();    
   }, []);
@@ -39,7 +46,7 @@ function FormWedding() {
             <TextField id="outlined-basic" label="Name" variant="outlined" name='name' />
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            <Button variant="contained">{myUsername}</Button>
+            <Button variant="contained">Kirim Data</Button>
             </Stack>
           </Container>
         </Card>
