@@ -15,7 +15,7 @@ function FormWedding() {
   const Location = useLocation();
   const [myUsername, setMyusername] = useState('')
   const [authenticated, setauthenticated] = useState(null);
-  const value = useContext(UserContext);
+  const {dataName} = useContext(UserContext)
 
   useEffect(() => {
     const getToken = localStorage.getItem('myToken')
@@ -47,6 +47,7 @@ function FormWedding() {
           <Container maxWidth="lg">
             <Stack direction="column" spacing={6}>
             <Page title="test"/>
+            {dataName}
             <TextField id="outlined-basic" label="Name" variant="outlined" name='name' />
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />

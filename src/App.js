@@ -10,9 +10,9 @@ import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 
 // ----------------------------------------------------------------------
 export default function App() {
-  const [dataName, setdataname] = useState('data')
+  const [dataName, setdataname] = useState('something')
   return (
-    <UserContext.Provider value='fs'>
+    <UserContext.Provider value={{dataName, setdataname}}>
       <ThemeProvider>
         <ScrollToTop />
         <BaseOptionChartStyle />

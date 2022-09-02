@@ -85,6 +85,9 @@
     "prettier": "^2.7.1"
   },
   "overrides": {
-    "@svgr/webpack": "^6.2.1"
+    "@svgr/webpack": "^6.2.1",
+    "rules": {
+      "global-require": 0  
+    }
   }
 }
