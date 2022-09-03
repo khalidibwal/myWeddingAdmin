@@ -10,7 +10,7 @@ import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 
 // ----------------------------------------------------------------------
 export default function App() {
-  const [dataName, setdataname] = useState('something')
+  const [dataName, setdataname] = useState(null)
   return (
     <UserContext.Provider value={{dataName, setdataname}}>
       <ThemeProvider>

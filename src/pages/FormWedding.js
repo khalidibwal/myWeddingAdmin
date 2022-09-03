@@ -15,7 +15,7 @@ function FormWedding() {
   const Location = useLocation();
   const [myUsername, setMyusername] = useState('')
   const [authenticated, setauthenticated] = useState(null);
-  const {dataName} = useContext(UserContext)
+  const {dataName, setdataname} = useContext(UserContext)
 
   useEffect(() => {
     const getToken = localStorage.getItem('myToken')
@@ -30,6 +30,7 @@ function FormWedding() {
       .then((response)=>{
         if (getToken) {
           setauthenticated(getToken);
+          setdataname(response.data.name)
         }
         else{
           Navigate('/login')
