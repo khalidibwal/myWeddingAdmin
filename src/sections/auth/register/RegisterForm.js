@@ -1,5 +1,8 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import axios from 'axios';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
@@ -17,6 +20,24 @@ export default function RegisterForm() {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showWedding, setShowWedding] = useState([]);
+  const [woName, setWoName] = useState('');
+  const [regisName, setRegisname] = useState('');
+  const [regisUser, setRegisUser] = useState('');
+  const [regisEmail, setRegisEmail] = useState('');
+  const [regisPassword, setRegisPassword] = useState('');
+
+  useEffect(() => {
+    axios
+      .get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/wo_desc`)
+      .then((response) => {
+        if (response.status === 200) {
+          setShowWedding(response.data);
+          console.log(response);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
@@ -30,6 +51,13 @@ export default function RegisterForm() {
     lastName: '',
     email: '',
     password: '',
+  };
+
+  const myDefault = {
+    name: regisName,
+    username: regisUser,
+    email: regisEmail,
+    password: regisPassword,
   };
 
   const methods = useForm({
@@ -46,16 +74,16 @@ export default function RegisterForm() {
     navigate('/dashboard', { replace: true });
   };
 
+  function handleChange(e) {
+    setWoName(e.target.value);
+  }
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <RHFTextField name="firstName" label="First name" />
-          <RHFTextField name="lastName" label="Last name" />
-        </Stack>
-
+        <RHFTextField name="name" label="FullName" />
+        <RHFTextField name="username" label="Username" />
         <RHFTextField name="email" label="Email address" />
-
         <RHFTextField
           name="password"
           label="Password"
@@ -70,6 +98,14 @@ export default function RegisterForm() {
             ),
           }}
         />
+
+        <Select labelId="demo-multiple-name-label" id="demo-multiple-name" value={woName} onChange={handleChange}>
+          {showWedding.map((name) => (
+            <MenuItem key={name.id} value={name.id}>
+              {name.wo_name}
+            </MenuItem>
+          ))}
+        </Select>
 
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           Register
