@@ -12,8 +12,10 @@ import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 export default function App() {
   const [dataName, setdataname] = useState(null)
   const [userEmail, setUserEmail] = useState(null)
+  const [myweddingid, setmyweddingid] = useState(null)
+  const [userid, setuserid] = useState(null)
   return (
-    <UserContext.Provider value={{dataName, setdataname, userEmail, setUserEmail}}>
+    <UserContext.Provider value={{dataName, setdataname, userEmail, setUserEmail, myweddingid, setmyweddingid, userid, setuserid}}>
       <ThemeProvider>
         <ScrollToTop />
         <BaseOptionChartStyle />
