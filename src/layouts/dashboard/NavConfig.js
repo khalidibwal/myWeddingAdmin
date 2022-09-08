@@ -17,7 +17,7 @@ const navConfig = [
     icon: getIcon('eva:people-fill'),
   },
   {
-    title: 'wedding input',
+    title: 'Data gedung',
     path: '/dashboard/wedding',
     icon: getIcon('eva:people-fill'),
   },
