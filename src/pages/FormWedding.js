@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import Label from '../components/Label';
-import MyTable from 'src/components/tables/MyTable';
+import MyTable from 'src/components/tables/VenueTable';
 
 function FormWedding() {
   const Navigate = useNavigate();
@@ -17,6 +17,7 @@ function FormWedding() {
   const [authenticated, setauthenticated] = useState(null);
   const [myBuilding, setMyBuilding] = useState('');
   const [myLocation, setMyLocation] = useState('');
+  const [tableData, setTable] = useState([])
   const { dataName, setdataname } = useContext(UserContext);
   const { userEmail, setUserEmail } = useContext(UserContext);
   const { myweddingid, setmyweddingid } = useContext(UserContext);
@@ -44,9 +45,12 @@ function FormWedding() {
           }
         });
     };
+
+
     isAuthorized();
     getTableData();
-  }, []);
+  }, [userid]);
+
   const defaultValues = {
     building_name: myBuilding,
     location: myLocation,
@@ -54,14 +58,24 @@ function FormWedding() {
     users_id: userid,
   };
 
+  const TablePageHeading = [
+    {text:'Nama Gedung'},
+    {text:'Lokasi'},
+    {text:'Harga'}
+  ]
+
   const getTableData = async() =>{
-    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue/users_id?=${userid}`)
-    .then((response)=> {
-      if(response.status === 200){
-        console.log(response,"get Table");
+    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`,{
+      params:{
+        users_id: userid
       }
     })
-    
+    .then((response)=> {
+      if(response.status === 200){
+        console.log(response.data,'e')
+        setTable(response.data)
+      }
+    }) 
   }
 
   const handleBuiding = (e) => {
@@ -117,7 +131,7 @@ function FormWedding() {
         <br />
         <Card sx={{ maxHeight: 200 }}>
           <CardContent>
-            <MyTable />
+            <MyTable TableHead={TablePageHeading} TableContent={tableData} />
           </CardContent>
         </Card>
       </Page>
