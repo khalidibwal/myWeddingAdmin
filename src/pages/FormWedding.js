@@ -89,7 +89,7 @@ function FormWedding() {
   const onSubmit = (e) => { 
     e.preventDefault();
     axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`, defaultValues).then((response) => {
-      if (response.status === 200) {
+      if (response.status === 200 && myBuilding !== '' && myLocation !== '') {
         swal('Successfully Save!', 'Data Berhasil Disimpan!', 'success');
       } else {
         swal('Something Wrong!', 'Data gagal tersimpan!', 'error');
