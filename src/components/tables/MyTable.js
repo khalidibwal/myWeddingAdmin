@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-function MyTable() {
+function MyTable(props) {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 700 }}>

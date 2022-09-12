@@ -45,6 +45,7 @@ function FormWedding() {
         });
     };
     isAuthorized();
+    getTableData();
   }, []);
   const defaultValues = {
     building_name: myBuilding,
@@ -52,6 +53,16 @@ function FormWedding() {
     wo_desc_id: myweddingid,
     users_id: userid,
   };
+
+  const getTableData = async() =>{
+    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue/users_id?=${userid}`)
+    .then((response)=> {
+      if(response.status === 200){
+        console.log(response,"get Table");
+      }
+    })
+    
+  }
 
   const handleBuiding = (e) => {
     setMyBuilding(e.target.value);
@@ -61,11 +72,11 @@ function FormWedding() {
     setMyLocation(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => { 
     e.preventDefault();
     axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`, defaultValues).then((response) => {
       if (response.status === 200) {
-        swal('Good job!', 'Data Berhasil Disimpan!', 'success');
+        swal('Successfully Save!', 'Data Berhasil Disimpan!', 'success');
       } else {
         swal('Something Wrong!', 'Data gagal tersimpan!', 'error');
       }
