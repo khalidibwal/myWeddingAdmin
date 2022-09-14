@@ -17,6 +17,7 @@ function FormWedding() {
   const [authenticated, setauthenticated] = useState(null);
   const [myBuilding, setMyBuilding] = useState('');
   const [myLocation, setMyLocation] = useState('');
+  const [myPrice, setMyPrice] = useState('');
   const [tableData, setTable] = useState([])
   const { dataName, setdataname } = useContext(UserContext);
   const { userEmail, setUserEmail } = useContext(UserContext);
@@ -54,6 +55,7 @@ function FormWedding() {
   const defaultValues = {
     building_name: myBuilding,
     location: myLocation,
+    price: myPrice,
     wo_desc_id: myweddingid,
     users_id: userid,
   };
@@ -85,6 +87,10 @@ function FormWedding() {
   const handleLocation = (e) => {
     setMyLocation(e.target.value);
   };
+
+  const handlePrice = (e) => {
+    setMyPrice(e.target.value)
+  }
 
   const onSubmit = (e) => { 
     e.preventDefault();
@@ -120,6 +126,14 @@ function FormWedding() {
                     name="location"
                     onChange={handleLocation}
                   />
+
+                  <TextField
+                    id="outlined-basic"
+                    label="Harga"
+                    variant="outlined"
+                    name="price"
+                    onChange={handlePrice}
+                  />
                   <Button variant="contained" type="submit" value="Submit">
                     Kirim Data
                   </Button>
@@ -129,7 +143,7 @@ function FormWedding() {
           </CardContent>
         </Card>
         <br />
-        <Card sx={{ maxHeight: 200 }}>
+        <Card>
           <CardContent>
             <MyTable TableHead={TablePageHeading} TableContent={tableData} />
           </CardContent>
