@@ -22,8 +22,18 @@ const navConfig = [
     icon: getIcon('eva:people-fill'),
   },
   {
+    title: 'Paket',
+    path: '/dashboard/package',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
     title: 'Kategori',
     path: '/dashboard/category',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
+    title: 'Data Dekorasi',
+    path: '/dashboard/decoration',
     icon: getIcon('eva:people-fill'),
   },
   // {

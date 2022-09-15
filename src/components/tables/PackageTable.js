@@ -5,7 +5,7 @@ function currencyFormat(num) {
   return 'Rp.' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
-function CategoryTable(props) {
+function PackageTable(props) {
   console.log(props);
   return (
     <TableContainer sx={{ maxHeight: 500, overflow:'scroll' }} component={Paper}>
@@ -23,10 +23,7 @@ function CategoryTable(props) {
               <>
               <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} hover>
                 <TableCell scope="row">
-                  {table.package}
-                </TableCell>
-                <TableCell scope="row">
-                  {currencyFormat(table.price)}
+                  {table.ctg_name}
                 </TableCell>
               </TableRow>
               </>
@@ -38,4 +35,4 @@ function CategoryTable(props) {
   );
 }
 
-export default CategoryTable;
+export default PackageTable;

@@ -9,16 +9,16 @@ import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import Label from '../components/Label';
 import MyTable from 'src/components/tables/VenueTable';
-import CategoryTable from 'src/components/tables/CategoryTable';
+import PackageTable from 'src/components/tables/PackageTable';
 
-function CategoryForm() {
+function PackageForm() {
   const Navigate = useNavigate();
   const Location = useLocation();
   const [myUsername, setMyusername] = useState('');
   const [authenticated, setauthenticated] = useState(null);
   const [myCategory, setMyCategory] = useState('');
-  const [myPackage, setMyPackage] = useState('');
-  const [myPrice, setMyPrice] = useState('');
+//   const [myPackage, setMyPackage] = useState('');
+//   const [myPrice, setMyPrice] = useState('');
   const [tableData, setTable] = useState([])
   const { dataName, setdataname } = useContext(UserContext);
   const { userEmail, setUserEmail } = useContext(UserContext);
@@ -54,17 +54,15 @@ function CategoryForm() {
   }, [userid]);
 
   const defaultValues = {
-    package : myPackage,
-    price : myPrice
+    ctg_name: myCategory
   };
 
   const TablePageHeading = [
-    {text:'Nama Paket'},
-    {text:'harga'},
+    {text:'Nama Kategori'},
   ]
 
   const getTableData = async() =>{
-    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/category`,{
+    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/packages`,{
       params:{
         users_id: userid
       }
@@ -80,16 +78,13 @@ function CategoryForm() {
   // const handleCategory = (e) => {
   //   setMyCategory(e.target.value);
   // };
-  const handlePackage = (e) => {
-    setMyPackage(e.target.value);
+  const handleCategory = (e) => {
+    setMyCategory(e.target.value);
   };
-  const handlePrice = (e) => {
-    setMyPrice(e.target.value)
-  }
 
   const onSubmit = (e) => { 
     e.preventDefault();
-    axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/category`, defaultValues).then((response) => {
+    axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/packages`, defaultValues).then((response) => {
       if (response.status === 200) {
         swal('Successfully Save!', 'Data Berhasil Disimpan!', 'success');
         window.location.reload();
@@ -108,27 +103,13 @@ function CategoryForm() {
               <Container maxWidth="lg">
                 <Stack direction="column" spacing={6}>
                   <Page title="test" />
-                  {/* <TextField
-                    id="outlined-basic"
-                    label="Nama kategori"
-                    variant="outlined"
-                    name="category_name"
-                    onChange={handleCategory}
-                  /> */}
-                  <TextField
-                    id="outlined-basic"
-                    label="Nama Paket"
-                    variant="outlined"
-                    name="package"
-                    onChange={handlePackage}
-                  />
 
                   <TextField
                     id="outlined-basic"
-                    label="harga"
+                    label="Nama Kategori"
                     variant="outlined"
-                    name="price"
-                    onChange={handlePrice}
+                    name="package"
+                    onChange={handleCategory}
                   />
 
                   <Button variant="contained" type="submit" value="Submit">
@@ -142,7 +123,7 @@ function CategoryForm() {
         <br />
         <Card>
           <CardContent>
-            <CategoryTable TableHead={TablePageHeading} TableContent={tableData} />
+            <PackageTable TableHead={TablePageHeading} TableContent={tableData} />
           </CardContent>
         </Card>
       </Page>
@@ -150,4 +131,4 @@ function CategoryForm() {
   );
 }
 
-export default CategoryForm;
+export default PackageForm;

@@ -12,6 +12,8 @@ import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import FormWedding from './pages/FormWedding';
 import CategoryForm from './pages/CategoryForm';
+import PackageForm from './pages/PackageForm';
+import DecorationForm from './pages/DecorationForm';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +28,9 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'wedding', element: <FormWedding /> },
-        { path: 'category', element: <CategoryForm /> },
+        { path: 'package', element: <CategoryForm /> },
+        { path: 'category', element: <PackageForm /> },
+        { path: 'decoration', element: <DecorationForm /> },
       ],
     },
     {
