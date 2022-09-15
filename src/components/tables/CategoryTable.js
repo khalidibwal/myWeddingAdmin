@@ -1,11 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
-function currencyFormat(num) {
-  return 'Rp.' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
 
-function MyTable(props) {
+function CategoryTable(props) {
   console.log(props);
   return (
     <TableContainer sx={{ maxHeight: 500, overflow:'scroll' }} component={Paper}>
@@ -23,13 +20,10 @@ function MyTable(props) {
               <>
               <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} hover>
                 <TableCell scope="row">
-                  {table.building_name}
+                  {table.category_name}
                 </TableCell>
                 <TableCell scope="row">
-                  {table.location}
-                </TableCell>
-                <TableCell scope="row">
-                  {currencyFormat(table.price)}
+                  {table.package}
                 </TableCell>
               </TableRow>
               </>
@@ -41,4 +35,4 @@ function MyTable(props) {
   );
 }
 
-export default MyTable;
+export default CategoryTable;

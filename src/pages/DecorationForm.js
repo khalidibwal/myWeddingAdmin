@@ -10,14 +10,15 @@ import Page from '../components/Page';
 import Label from '../components/Label';
 import MyTable from 'src/components/tables/VenueTable';
 
-function FormWedding() {
+function DecorationForm() {
   const Navigate = useNavigate();
   const Location = useLocation();
   const [myUsername, setMyusername] = useState('');
   const [authenticated, setauthenticated] = useState(null);
-  const [myBuilding, setMyBuilding] = useState('');
-  const [myLocation, setMyLocation] = useState('');
-  const [myPrice, setMyPrice] = useState('');
+//   const [myBuilding, setMyBuilding] = useState('');
+//   const [myLocation, setMyLocation] = useState('');
+//   const [myPrice, setMyPrice] = useState('');
+  const [myDecor, setMyDecor] = useState('');
   const [tableData, setTable] = useState([])
   const { dataName, setdataname } = useContext(UserContext);
   const { userEmail, setUserEmail } = useContext(UserContext);
@@ -53,11 +54,7 @@ function FormWedding() {
   }, [userid]);
 
   const defaultValues = {
-    building_name: myBuilding,
-    location: myLocation,
-    price: myPrice,
-    wo_desc_id: myweddingid,
-    users_id: userid,
+
   };
 
   const TablePageHeading = [
@@ -80,22 +77,15 @@ function FormWedding() {
     }) 
   }
 
-  const handleBuiding = (e) => {
-    setMyBuilding(e.target.value);
+  const handleDecor = (e) => {
+    setMyDecor(e.target.value);
   };
 
-  const handleLocation = (e) => {
-    setMyLocation(e.target.value);
-  };
-
-  const handlePrice = (e) => {
-    setMyPrice(e.target.value)
-  }
 
   const onSubmit = (e) => { 
     e.preventDefault();
     axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`, defaultValues).then((response) => {
-      if (response.status === 200 && myBuilding !== '' && myLocation !== '') {
+      if (response.status === 200) {
         swal('Successfully Save!', 'Data Berhasil Disimpan!', 'success');
         window.location.reload();
       } else {
@@ -115,26 +105,12 @@ function FormWedding() {
                   <Page title="test" />
                   <TextField
                     id="outlined-basic"
-                    label="Nama Gedung"
+                    label="Nama Dekorasi"
                     variant="outlined"
                     name="building_name"
-                    onChange={handleBuiding}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Lokasi"
-                    variant="outlined"
-                    name="location"
-                    onChange={handleLocation}
+                    onChange={handleDecor}
                   />
 
-                  <TextField
-                    id="outlined-basic"
-                    label="Harga"
-                    variant="outlined"
-                    name="price"
-                    onChange={handlePrice}
-                  />
                   <Button variant="contained" type="submit" value="Submit">
                     Kirim Data
                   </Button>
@@ -154,4 +130,4 @@ function FormWedding() {
   );
 }
 
-export default FormWedding;
+export default DecorationForm;

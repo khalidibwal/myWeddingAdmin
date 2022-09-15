@@ -21,6 +21,11 @@ const navConfig = [
     path: '/dashboard/wedding',
     icon: getIcon('eva:people-fill'),
   },
+  {
+    title: 'Kategori',
+    path: '/dashboard/category',
+    icon: getIcon('eva:people-fill'),
+  },
   // {
   //   title: 'product',
   //   path: '/dashboard/products',

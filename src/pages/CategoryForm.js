@@ -9,15 +9,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import Page from '../components/Page';
 import Label from '../components/Label';
 import MyTable from 'src/components/tables/VenueTable';
+import CategoryTable from 'src/components/tables/CategoryTable';
 
-function FormWedding() {
+function CategoryForm() {
   const Navigate = useNavigate();
   const Location = useLocation();
   const [myUsername, setMyusername] = useState('');
   const [authenticated, setauthenticated] = useState(null);
-  const [myBuilding, setMyBuilding] = useState('');
-  const [myLocation, setMyLocation] = useState('');
-  const [myPrice, setMyPrice] = useState('');
+  const [myCategory, setMyCategory] = useState('');
+  const [myPackage, setMyPackage] = useState('');
   const [tableData, setTable] = useState([])
   const { dataName, setdataname } = useContext(UserContext);
   const { userEmail, setUserEmail } = useContext(UserContext);
@@ -53,21 +53,17 @@ function FormWedding() {
   }, [userid]);
 
   const defaultValues = {
-    building_name: myBuilding,
-    location: myLocation,
-    price: myPrice,
-    wo_desc_id: myweddingid,
-    users_id: userid,
+    category_name : myCategory,
+    package : myPackage
   };
 
   const TablePageHeading = [
-    {text:'Nama Gedung'},
-    {text:'Lokasi'},
-    {text:'Harga'}
+    {text:'Nama Kategori'},
+    {text:'Nama Paket'}
   ]
 
   const getTableData = async() =>{
-    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`,{
+    await axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/category`,{
       params:{
         users_id: userid
       }
@@ -80,22 +76,17 @@ function FormWedding() {
     }) 
   }
 
-  const handleBuiding = (e) => {
-    setMyBuilding(e.target.value);
+  const handleCategory = (e) => {
+    setMyCategory(e.target.value);
   };
-
-  const handleLocation = (e) => {
-    setMyLocation(e.target.value);
+  const handlePackage = (e) => {
+    setMyPackage(e.target.value);
   };
-
-  const handlePrice = (e) => {
-    setMyPrice(e.target.value)
-  }
 
   const onSubmit = (e) => { 
     e.preventDefault();
-    axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/venue`, defaultValues).then((response) => {
-      if (response.status === 200 && myBuilding !== '' && myLocation !== '') {
+    axios.post(`https://x8ki-letl-twmt.n7.xano.io/api:_G_SfNPu/category`, defaultValues).then((response) => {
+      if (response.status === 200) {
         swal('Successfully Save!', 'Data Berhasil Disimpan!', 'success');
         window.location.reload();
       } else {
@@ -115,26 +106,19 @@ function FormWedding() {
                   <Page title="test" />
                   <TextField
                     id="outlined-basic"
-                    label="Nama Gedung"
+                    label="Nama kategori"
                     variant="outlined"
-                    name="building_name"
-                    onChange={handleBuiding}
+                    name="category_name"
+                    onChange={handleCategory}
                   />
                   <TextField
                     id="outlined-basic"
-                    label="Lokasi"
+                    label="Nama Paket"
                     variant="outlined"
                     name="location"
-                    onChange={handleLocation}
+                    onChange={handlePackage}
                   />
 
-                  <TextField
-                    id="outlined-basic"
-                    label="Harga"
-                    variant="outlined"
-                    name="price"
-                    onChange={handlePrice}
-                  />
                   <Button variant="contained" type="submit" value="Submit">
                     Kirim Data
                   </Button>
@@ -146,7 +130,7 @@ function FormWedding() {
         <br />
         <Card>
           <CardContent>
-            <MyTable TableHead={TablePageHeading} TableContent={tableData} />
+            <CategoryTable TableHead={TablePageHeading} TableContent={tableData} />
           </CardContent>
         </Card>
       </Page>
@@ -154,4 +138,4 @@ function FormWedding() {
   );
 }
 
-export default FormWedding;
+export default CategoryForm;

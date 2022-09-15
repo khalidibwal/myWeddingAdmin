@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import FormWedding from './pages/FormWedding';
+import CategoryForm from './pages/CategoryForm';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'wedding', element: <FormWedding /> },
+        { path: 'category', element: <CategoryForm /> },
       ],
     },
     {
