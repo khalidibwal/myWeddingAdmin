@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
-function DecorationTable(props) {
+function AttireTable(props) {
   console.log(props);
   return (
     <TableContainer sx={{ maxHeight: 500, overflow: 'scroll' }} component={Paper}>
@@ -15,10 +15,11 @@ function DecorationTable(props) {
         </TableHead>
         <TableBody>
           {props.TableContent.map((table) => {
+            console.log(table.mua,'t')
             return (
               <>
                 <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} hover>
-                  <TableCell scope="row">{table.decor_name}</TableCell>
+                  <TableCell scope="row">{table.mua}</TableCell>
                   {table.category.map((response) => {
                     return <TableCell scope="row">{response.package}</TableCell>;
                   })}
@@ -35,4 +36,4 @@ function DecorationTable(props) {
   );
 }
 
-export default DecorationTable;
+export default AttireTable;

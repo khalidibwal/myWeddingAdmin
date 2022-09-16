@@ -14,6 +14,8 @@ import FormWedding from './pages/FormWedding';
 import CategoryForm from './pages/CategoryForm';
 import PackageForm from './pages/PackageForm';
 import DecorationForm from './pages/DecorationForm';
+import CateringForm from './pages/CateringForm';
+import AttireForm from './pages/AttireForm';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +33,8 @@ export default function Router() {
         { path: 'package', element: <CategoryForm /> },
         { path: 'category', element: <PackageForm /> },
         { path: 'decoration', element: <DecorationForm /> },
+        { path: 'catering', element: <CateringForm /> },
+        { path: 'makeup', element: <AttireForm /> },
       ],
     },
     {

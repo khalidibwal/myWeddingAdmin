@@ -36,6 +36,16 @@ const navConfig = [
     path: '/dashboard/decoration',
     icon: getIcon('eva:people-fill'),
   },
+  {
+    title: 'Data Katering',
+    path: '/dashboard/catering',
+    icon: getIcon('eva:people-fill'),
+  },
+  {
+    title: 'Data Rias makeup',
+    path: '/dashboard/makeup',
+    icon: getIcon('eva:people-fill'),
+  },
   // {
   //   title: 'product',
   //   path: '/dashboard/products',
