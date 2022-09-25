@@ -20,10 +20,11 @@ import AttireForm from './pages/AttireForm';
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const isLogin = localStorage.getItem('myToken')
   return useRoutes([
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: isLogin? <DashboardLayout /> : <Login />,
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },

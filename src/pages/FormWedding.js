@@ -63,7 +63,8 @@ function FormWedding() {
   const TablePageHeading = [
     {text:'Nama Gedung'},
     {text:'Lokasi'},
-    {text:'Harga'}
+    {text:'Harga'},
+    {text:'Action'}
   ]
 
   const getTableData = async() =>{
