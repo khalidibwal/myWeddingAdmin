@@ -50,7 +50,7 @@ function FormWedding() {
 
     isAuthorized();
     getTableData();
-  }, [userid]);
+  }, [userid, myweddingid]);
 
   const defaultValues = {
     building_name: myBuilding,

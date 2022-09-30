@@ -16,6 +16,7 @@ import PackageForm from './pages/PackageForm';
 import DecorationForm from './pages/DecorationForm';
 import CateringForm from './pages/CateringForm';
 import AttireForm from './pages/AttireForm';
+import VenueDetail from './components/details/VenueDetail';
 
 // ----------------------------------------------------------------------
 
@@ -59,5 +60,9 @@ export default function Router() {
       path: '*',
       element: <Navigate to="/404" replace />,
     },
+    {
+      path: 'wedding/:id',
+      element: <VenueDetail />
+    }
   ]);
 }
